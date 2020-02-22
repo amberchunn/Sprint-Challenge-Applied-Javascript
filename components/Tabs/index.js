@@ -7,3 +7,14 @@
 //
 //  The tab component should look like this:
 //    <div class="tab">topic here</div>
+
+// Get Request from Github User ID
+axios
+	.get('https://lambda-times-backend.herokuapp.com/topics')
+	.then(response => {
+		let data = response.data;
+		return data;
+	})
+	.catch(error => {
+		console.log('Failure to communicate. The Daleks are comming.', error);
+	});
