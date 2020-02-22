@@ -8,13 +8,27 @@
 //  The tab component should look like this:
 //    <div class="tab">topic here</div>
 
-// Get Request from Github User ID
+// Axios Get Request from News Source
 axios
 	.get('https://lambda-times-backend.herokuapp.com/topics')
 	.then(response => {
 		let data = response.data;
-		return data;
+
+		// console.log('Success. You mission succedded');
+		// console.log(data);
+
+		let topicMenu = document.querySelector('.topics');
+
+		function tabNav(data) {
+			data.forEach(item => {
+				let tab = document.createElement('div').setAttribute('class', 'tab');
+				tab.document.creatTextNode(item);
+				topicMenu.appendChild(tab);
+			});
+			// console.log(topicMenu);
+		}
+		return tabNav;
 	})
 	.catch(error => {
-		console.log('Failure to communicate. The Daleks are comming.', error);
+		console.log('Error:', error);
 	});
