@@ -9,20 +9,43 @@
 //  </div >
 // And add it to the DOM in the .header-container component
 
-function Header() {
-	let header = document.createElement('div').setAttribute('class', 'header');
-	let date = document.createElement('span').setAttribute('class', 'date');
-	let heading = document.createElement('h1');
-	let temp = document.createElement('span').setAttribute('class', 'temp');
+// let curDate = ();
+// const date = {
+// 	month: curDate.getMonth() + 1,
+// 	day: curDate.getDate(),
+// 	year: curDate.getFullYear()
+// };
+
+const data = {
+	date: 'February 24, 2020',
+	heading: 'Lambda Times',
+	temp: '70º'
+};
+
+let headerContainer = document.querySelector('.header-container');
+
+function headerCreator(data) {
+	let container = document.createElement('div').setAttribute('class', 'header');
+	let dateEl = document.createElement('span').setAttribute('class', 'date');
+	let headingEl = document.createElement('h1');
+	let tempEl = document.createElement('span').setAttribute('class', 'temp');
+
+	// Add Text
+	dateEl.textContent(data.date);
+	headingEl.textContent(data.heading);
+	tempEl.textContent(data.temp);
 
 	// Append Header Elements
-	header.appendChild(date);
-	header.appendChild(heading);
-	header.appendChild(temp);
+	container.appendChild(dateEl);
+	container.appendChild(headingEl);
+	container.appendChild(tempEl);
 
-	// Add Header to DOM
-	let headerContainer = document.querySelector('.header-container');
-	headerContainer.appendChild(header);
-
-	// console.log('Are YOU here?');
+	// Always Return Component
+	return container;
 }
+
+// Create Article Header
+let header = headerCreator(data);
+
+// Add Header to DOM
+headerContainer.appendChild(header);

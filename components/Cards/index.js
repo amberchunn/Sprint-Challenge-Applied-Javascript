@@ -23,14 +23,19 @@ axios
 	.get('https://lambda-times-backend.herokuapp.com/articles')
 	.then(response => {
 		let data = response.data;
-		// console.log('Success. You mission succedded');
-		// console.log(data.articles);
+		// console.table(data.articles);
 
-		data.articles.forEach(item => {
-			console.log(item);
+		// Loop Over Data Object
+		const obj = Object.entries(data.articles);
+
+		obj.forEach(item => {
+			// console.table(item);
+			item.forEach(arr => {
+				console.table(arr);
+			});
 		});
 
-		// Set Up Car Structure
+		// Set Up Card Structure
 		let card = document.createElement('div').setAttribute('class', 'card');
 		let headline = document.createElement('div').setAttribute('class', 'headline');
 		let author = document.createElement('div').setAttribute('class', 'author');
