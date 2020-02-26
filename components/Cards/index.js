@@ -22,31 +22,36 @@
 axios
 	.get('https://lambda-times-backend.herokuapp.com/articles')
 	.then(response => {
-		let data = response.data;
-		// console.table(data.articles);
-
-		// Loop Over Data Object
-		const obj = Object.entries(data.articles);
-
-		obj.forEach(item => {
-			// console.table(item);
-			item.forEach(arr => {
-				console.table(arr);
-			});
-		});
-
-		// Set Up Card Structure
-		let card = document.createElement('div').setAttribute('class', 'card');
-		let headline = document.createElement('div').setAttribute('class', 'headline');
-		let author = document.createElement('div').setAttribute('class', 'author');
-		let imgContainer = document
-			.createElement('div')
-			.setAttribute('class', 'img-container');
-		let image = document.createElement('img').setAttribute('src', '#');
-		let byline = document.createElement('span');
-
-		// Get Card Data
+		// Retrieve Data From Promise
+		const articleArr = response.data.articles;
+		// Run the Function
+		articleCreator(articleArr);
 	})
 	.catch(error => {
 		console.log('Error:', error);
 	});
+
+// Function to Create Article Data
+const articleCreator = arr => {
+	arr.forEach(item => {
+		const card = document.createElement('div');
+		card.setAttribute('class', 'card');
+
+		let headline = document.createElement('div');
+		headline.setAttribute('class', 'headline');
+		headline.textContent = item.headline;
+		let author = document.createElement('div');
+		author.setAttribute('class', 'author');
+
+		let imgContainer = document.createElement('div');
+		imgContainer.setAttribute('class', 'img-container');
+
+		let image = document.createElement('img');
+		image.setAttribute('src', '#');
+
+		let byline = document.createElement('span');
+		byline.textContent = `By ${item.byline}`;
+		let cardListing = document.querySelector('.cards-container');
+		cardListing.appendChild(artDiv);
+	});
+};

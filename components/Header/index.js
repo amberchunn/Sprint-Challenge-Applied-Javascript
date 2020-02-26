@@ -25,15 +25,18 @@ const data = {
 let headerContainer = document.querySelector('.header-container');
 
 function headerCreator(data) {
-	let container = document.createElement('div').setAttribute('class', 'header');
-	let dateEl = document.createElement('span').setAttribute('class', 'date');
+	let container = document.createElement('div');
+	container.classList.add('header');
+	let dateEl = document.createElement('span');
+	dateEl.classList.add('date');
 	let headingEl = document.createElement('h1');
-	let tempEl = document.createElement('span').setAttribute('class', 'temp');
+	let tempEl = document.createElement('span');
+	tempEl.classList.add('temp');
 
 	// Add Text
-	dateEl.textContent(data.date);
-	headingEl.textContent(data.heading);
-	tempEl.textContent(data.temp);
+	dateEl.textContent = data.date;
+	headingEl.textContent = data.heading;
+	tempEl.textContent = data.temp;
 
 	// Append Header Elements
 	container.appendChild(dateEl);

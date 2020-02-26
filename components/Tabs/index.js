@@ -12,23 +12,23 @@
 axios
 	.get('https://lambda-times-backend.herokuapp.com/topics')
 	.then(response => {
-		let data = response.data;
+		// Retrieve Data From Promise
+		const topicsArr = response.data.topics;
 
-		// console.log('Success. You mission succedded');
-		// console.log(data);
-
-		let topicMenu = document.querySelector('.topics');
-
-		function tabNav(data) {
-			data.forEach(item => {
-				let tab = document.createElement('div').setAttribute('class', 'tab');
-				tab.document.creatTextNode(item);
-				topicMenu.appendChild(tab);
+		// Create the Tabs
+		const tabCreator = arr => {
+			arr.forEach(item => {
+				const tabDiv = document.createElement('div');
+				tabDiv.classList.add('tab');
+				tabDiv.textContent = item;
+				let menu = document.querySelector('.topics');
+				menu.appendChild(tabDiv);
 			});
-			// console.log(topicMenu);
-		}
-		return tabNav;
-	})
+		};
+
+		// Run the Function
+		tabCreator(topicsArr);
+	}) // Close of .then
 	.catch(error => {
 		console.log('Error:', error);
 	});
