@@ -11,24 +11,25 @@
 // Axios Get Request from News Source
 axios
 	.get('https://lambda-times-backend.herokuapp.com/topics')
-	.then(response => {
+	.then((response) => {
 		// Retrieve Data From Promise
 		const topicsArr = response.data.topics;
 
 		// Create the Tabs
-		const tabCreator = arr => {
-			arr.forEach(item => {
-				const tabDiv = document.createElement('div');
-				tabDiv.classList.add('tab');
-				tabDiv.textContent = item;
-				let menu = document.querySelector('.topics');
-				menu.appendChild(tabDiv);
+		function tabCreator(arr) {
+			const menu = document.querySelector('.topics');
+			const tabs = arr.forEach((item) => {
+				const tab = document.createElement('div');
+				tab.classList.add('tab');
+				tab.textContent = item;
+				menu.appendChild(tab);
 			});
-		};
+			return menu;
+		}
 
 		// Run the Function
 		tabCreator(topicsArr);
-	}) // Close of .then
-	.catch(error => {
+	})
+	.catch((error) => {
 		console.log('Error:', error);
 	});

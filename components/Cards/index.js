@@ -1,7 +1,7 @@
 // STEP 3: Create Article cards.
 // -----------------------
 // Send an HTTP GET request to the following address: https://lambda-times-backend.herokuapp.com/articles
-// Stduy the response data you get back, closely.
+// Study the response data you get back, closely.
 // You will be creating a component for each 'article' in the list.
 // This won't be as easy as just iterating over an array though.
 // Create a function that will programmatically create the following DOM component:
@@ -16,42 +16,54 @@
 //   </div>
 // </div>
 //
-// Create a card for each of the articles and add the card to the DOM.
 
 // Axios Get Request from News Source
 axios
 	.get('https://lambda-times-backend.herokuapp.com/articles')
-	.then(response => {
+	.then((response) => {
 		// Retrieve Data From Promise
-		const articleArr = response.data.articles;
-		// Run the Function
-		articleCreator(articleArr);
+		const data = response.data.articles;
+
+		// Create a card for each of the articles and add the card to the DOM.
+
+		for (const prop in data) {
+			const cardListing = document.querySelector('.cards-container');
+			const topic = data[prop];
+			topic.forEach((item) => {
+				const article = articleCreator(item);
+				cardListing.appendChild(article);
+			});
+		}
 	})
-	.catch(error => {
+	.catch((error) => {
 		console.log('Error:', error);
 	});
 
-// Function to Create Article Data
-const articleCreator = arr => {
-	arr.forEach(item => {
-		const card = document.createElement('div');
-		card.setAttribute('class', 'card');
+// Function to Create Article Card
+function articleCreator(data) {
+	const card = document.createElement('div');
+	card.classList.add('card');
 
-		let headline = document.createElement('div');
-		headline.setAttribute('class', 'headline');
-		headline.textContent = item.headline;
-		let author = document.createElement('div');
-		author.setAttribute('class', 'author');
+	const headlineEl = document.createElement('div');
+	headlineEl.classList.add('headline');
+	headlineEl.textContent = data.headline;
 
-		let imgContainer = document.createElement('div');
-		imgContainer.setAttribute('class', 'img-container');
+	const author = document.createElement('div');
+	author.classList.add('author');
 
-		let image = document.createElement('img');
-		image.setAttribute('src', '#');
+	const imgContainer = document.createElement('div');
+	imgContainer.classList.add('img-container');
+	const image = document.createElement('img');
+	image.setAttribute('src', data.authorPhoto);
 
-		let byline = document.createElement('span');
-		byline.textContent = `By ${item.byline}`;
-		let cardListing = document.querySelector('.cards-container');
-		cardListing.appendChild(artDiv);
-	});
-};
+	const byline = document.createElement('span');
+	byline.textContent = `By ${data.authorName}`;
+
+	card.appendChild(headlineEl);
+	card.appendChild(author);
+	author.appendChild(imgContainer);
+	imgContainer.appendChild(image);
+	author.appendChild(byline);
+
+	return card;
+}

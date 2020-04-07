@@ -3,7 +3,7 @@
 // Using a function create the component you see below:
 //
 //  <div class="header">
-//    <span class="date">SMARCH 28, 2019</span>
+//    <span class="date">MARCH 28, 2019</span>
 //    <h1>Lambda Times</h1>
 //    <span class="temp">98°</span>
 //  </div >
@@ -19,7 +19,7 @@
 const data = {
 	date: 'February 24, 2020',
 	heading: 'Lambda Times',
-	temp: '70º'
+	temp: '70º',
 };
 
 let headerContainer = document.querySelector('.header-container');
